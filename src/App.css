@@ -1,0 +1,66 @@
+input:hover, input:focus, button:focus, button:hover  {
+  outline: none;
+  border-radius: 8px;
+  border: 1px solid #532bc2;
+}
+
+.App {
+  padding: 20px;
+}
+
+.container {
+  width: 500px;
+}
+
+.form {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+input {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  
+  border: 1px solid #000000;
+  border-radius: 8px;
+}
+
+.button_form {
+  height: 35px;
+  padding: 10px 20px;
+
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #000000;
+}
+
+img {
+  width: 15px;
+  height: 15px;
+}
+
+.list {
+  margin-top: 20px;
+}
+
+.list .header {
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.items {
+  padding: 20px;
+
+  border: 1px solid #000000;
+  border-radius: 8px;
+}
+
+.button_item {
+  background-color: #ffffff;
+  border: none;
+}
