@@ -23,6 +23,10 @@ class TrainingHistory extends Component {
   handleItemAdd = (obj) => {
     //не могу эту функцию написать. Хочу, чтобы она обрабатывала состояние trainingsList.
     //trainingsList - это массив с будущим списком объектов, созданных из экземпляров класса Model
+    // Мне надо, чтобы мы пробегали по trainingsList, проверяли,
+    //есть ли там объект с этой же датой {date: moment}, если есть, то добавляли к нему новую дистанцию,
+    //если нет, то добавляли новый объект класса Model
+
     const date = obj.date._d;
     const {distance} = obj;
     const list = this.state.trainingsList;
