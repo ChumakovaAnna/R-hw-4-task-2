@@ -4,42 +4,49 @@ import Model from "../Model/ItemModel";
 import Form from "./Form"
 import List from "./List"
 
-const a = new Model(moment("20.10.20", "DD.MM.YY"), "10");
-const b = new Model(moment("20.01.20", "DD.MM.YY"), "1");
-const arr = [a, b]
-
 class TrainingHistory extends Component {
   constructor() {
     super();
-    this.state = {trainingsList: [arr]};
-    this.tr = [];
+    this.state = {trainingsList: []};
   }
 
   handleItemRemove = (item) => {
-    // эта та строчка, которую я не понимаю. Часть -> trainingsList: prevState.trainingsList
-    this.useState(prevState => ({trainingsList: prevState.trainingsList.filter(o => o.id !== item.id)}));
+    // this.setState(prevState => {prevState.trainingsList.filter(o => o.id !== item.id)});//не убирается объект
+    this.state.trainingsList = this.remove(this.state.trainingsList, item); //и почему это работает только вместе с 16 строчкой.
+    this.setState(this.remove(this.state.trainingsList, item));
   }
 
-  handleItemAdd = (obj) => {
-    //не могу эту функцию написать. Хочу, чтобы она обрабатывала состояние trainingsList.
-    //trainingsList - это массив с будущим списком объектов, созданных из экземпляров класса Model
-    // Мне надо, чтобы мы пробегали по trainingsList, проверяли,
-    //есть ли там объект с этой же датой {date: moment}, если есть, то добавляли к нему новую дистанцию,
-    //если нет, то добавляли новый объект класса Model
+  remove = (list, item) => {
+    const newList = list.filter(o => o.id !== item.id);
+    return newList;
+  }
 
-    const date = obj.date._d;
-    const {distance} = obj;
-    const list = this.state.trainingsList;
-    console.log(list)
-    console.log(list[0].date)
-    console.log(obj)
+  
+  handleItemAdd = (obj) => {
+    this.setState([...this.checkedItemsByDate(this.state.trainingsList, obj)]);
+    this.setState(prevState => {prevState.trainingsList.sort((a, b) => (b.date - a.date))});
+  }
+
+  checkedItemsByDate = (list, obj) => {
+    const oldItem = list.find(item => {
+      if (item.date.isSame(obj.date)) {
+        return item;
+      }
+    });
+    if (oldItem) {
+      oldItem.distance += obj.distance;
+      return list;
+    }
+    const newItem = new Model(obj.date, obj.distance);
+    list.push(newItem);
+    return list;
   }
 
   render() {
     return (
       <>
         <Form onHandleItemAdd={this.handleItemAdd}></Form>
-        <List></List>
+        <List list={this.state.trainingsList} onRemoveItem={this.handleItemRemove}></List>
       </>
     );
   }

@@ -64,3 +64,8 @@ img {
   background-color: #ffffff;
   border: none;
 }
+
+.item {
+  display: flex;
+  justify-content: space-between;
+}

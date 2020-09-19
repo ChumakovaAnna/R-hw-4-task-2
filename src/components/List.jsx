@@ -3,10 +3,17 @@ import PropTypes from 'prop-types';
 import Item from "./Item";
 
 List.propTypes = {
-  
+  list: PropTypes.array.isRequired,
+  onRemoveItem: PropTypes.func.isRequired,
 };
 
 function List(props) {
+  const {list, onRemoveItem} = props;
+
+  const handleItemRemove = (item) => {
+    onRemoveItem(item); // проходит здесь еще раз. Как изменить, не знаю.
+  }
+
   return (
     <div className="list">
       <div className="header">
@@ -15,7 +22,7 @@ function List(props) {
         <span>Действия</span>
       </div>
       <div className="items">
-        <Item></Item>
+        {list.map(o => <Item key={o.id} item={o} onRemoveItem={() => handleItemRemove(o)}></Item>)}
       </div>
     </div>
   );

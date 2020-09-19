@@ -25,7 +25,7 @@ function Form(props) {
     if (evt.target.name === "distance") {
       const value = parseInt(evt.target.value);
       if (!isNaN(value)) {
-        newItem.distance = evt.target.value;
+        newItem.distance = Number(evt.target.value);
       } else {
         console.log("Некорректное число!");
       }
