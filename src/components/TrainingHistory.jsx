@@ -4,16 +4,20 @@ import Model from "../Model/ItemModel";
 import Form from "./Form"
 import List from "./List"
 
+const a = new Model(moment("20.10.20", "DD.MM.YY"), "10");
+const b = new Model(moment("20.01.20", "DD.MM.YY"), "1");
+
 class TrainingHistory extends Component {
   constructor() {
     super();
-    this.state = {trainingsList: []};
+    this.state = {trainingsList: [b,a]};
   }
 
   handleItemRemove = (item) => {
-    // this.setState(prevState => {prevState.trainingsList.filter(o => o.id !== item.id)});//не убирается объект
-    this.state.trainingsList = this.remove(this.state.trainingsList, item); //и почему это работает только вместе с 16 строчкой.
-    this.setState(this.remove(this.state.trainingsList, item));
+    this.setState(prevState => {
+      const newArr = prevState.trainingsList.filter(o => o.id !== item.id);
+      return {trainingsList: newArr};
+      });
   }
 
   remove = (list, item) => {

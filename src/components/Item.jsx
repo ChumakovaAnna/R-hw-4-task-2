@@ -4,11 +4,11 @@ import mark from "../img/delete.png";
 
 Item.propTypes = {
   item: PropTypes.object.isRequired,
-  onRemoveItem: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 function Item(props) {
-  const {item, onRemoveItem} = props;
+  const {item, onRemove} = props;
 
   const date = () => {
     const dateObj = item.date.toObject();
@@ -20,7 +20,7 @@ function Item(props) {
     <div className="item">
       <div className="data_item">{date()}</div>
       <div className="distance_item">{item.distance}</div>
-      <button className="button_item" onClick={onRemoveItem}>
+      <button className="button_item" onClick={() => {onRemove(item)}}>
         <img src={mark} alt="удалить"></img>
       </button>
     </div>

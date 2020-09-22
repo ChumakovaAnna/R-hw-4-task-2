@@ -10,10 +10,6 @@ List.propTypes = {
 function List(props) {
   const {list, onRemoveItem} = props;
 
-  const handleItemRemove = (item) => {
-    onRemoveItem(item); // проходит здесь еще раз. Как изменить, не знаю.
-  }
-
   return (
     <div className="list">
       <div className="header">
@@ -22,7 +18,7 @@ function List(props) {
         <span>Действия</span>
       </div>
       <div className="items">
-        {list.map(o => <Item key={o.id} item={o} onRemoveItem={() => handleItemRemove(o)}></Item>)}
+        {list.map(o => <Item key={o.id} item={o} onRemove={onRemoveItem}></Item>)}
       </div>
     </div>
   );
